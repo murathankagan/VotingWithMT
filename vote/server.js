@@ -28,7 +28,7 @@ app.post('/relayTransaction', async (req, res) => {
     const domain = {
         name: 'Forwarder',
         version: '0.0.1',
-        chainId: 5,
+        chainId: 11155111,
         verifyingContract: deployConfig.ForwarderAddress,
     };
 
@@ -47,9 +47,9 @@ app.post('/relayTransaction', async (req, res) => {
             message: 'The Transaction could not get verified.'
         });
     }
-
-    const provider = new ethers.providers.JsonRpcProvider(process.env.NEXT_PUBLIC_ETH_RPC_URL);
-    const connectedWallet = new ethers.Wallet(process.env.NEXT_PUBLIC_SPONSOR_PRIVATE_KEY, provider);
+    console.log(process.env.PRIVATE_KEY);
+    const provider = new ethers.providers.JsonRpcProvider(deployConfig.RPC_URL);
+    const connectedWallet = new ethers.Wallet(process.env.PRIVATE_KEY, provider);
     const forwarderContract = new ethers.Contract(deployConfig.ForwarderAddress, ForwarderAbi, connectedWallet);
     const functionSignature = request.data.slice(0, 10);
     console.log(functionSignature);
@@ -65,6 +65,7 @@ app.post('/relayTransaction', async (req, res) => {
     const gasLimit = (parseInt(request.gas) + 50000).toString();
     const contractTx = await forwarderContract.executeDelegate(request, signature, { gasLimit });
     const transactionReceipt = await contractTx.wait();
+    console.log(transactionReceipt);
 
     return res.json(transactionReceipt);
 });

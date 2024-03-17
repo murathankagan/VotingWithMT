@@ -1,5 +1,5 @@
 import { ethers } from 'ethers';
-import deployConfig from './deploy.json';
+import deployConfig from '../web3/deploy.json';
 import forwarderAbi from '../abi/Forwarder.json';
 import voteAbi from '../abi/Vote.json';
 
@@ -10,6 +10,8 @@ async function sendMessage(chainID, optionID) {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     const signer = provider.getSigner();
     const recipient = new ethers.Contract(deployConfig.VoteAddress, voteAbi, signer);
+    console.log("ChainID "+chainID);
+    console.log("OptionID " + optionID);
 
     const accounts = await provider.send('eth_accounts');
     if (accounts.length === 0) {
@@ -21,8 +23,8 @@ async function sendMessage(chainID, optionID) {
 }
 
 async function sendMetaTx(recipient, signer, chainID, optionID, selectedAddress) {
-    const forwarder = new ethers.Contract(deployConfig.Forwarder, forwarderAbi, signer);
-    const data = recipient.interface.encodeFunctionData('voteContent(uint256, uint256)', [chainID, optionID]);
+    const forwarder = new ethers.Contract(deployConfig.ForwarderAddress, forwarderAbi, signer);
+    const data = recipient.interface.encodeFunctionData('voteContent', [chainID, optionID]);
     const to = recipient.address;
 
     const { signature, request } = await signMetaTxRequest(forwarder, { to, from: selectedAddress, data }, signer);
@@ -61,7 +63,7 @@ async function buildRequest(forwarder, input) {
 
 async function buildTypedData(request) {
     const chainId = 11155111;
-    const typeData = getMetaTxTypeData(chainId, deployConfig.Forwarder);
+    const typeData = getMetaTxTypeData(chainId, deployConfig.ForwarderAddress);
     return {
         ...typeData,
         message: request
@@ -120,7 +122,7 @@ async function signTypedData(signer, data) {
             name: 'Forwarder',
             version: '0.0.1',
             chainId: 11155111,
-            verifyingContract: deployConfig.Forwarder
+            verifyingContract: deployConfig.ForwarderAddress
         }
 
         const recoveredAddress = ethers.utils.verifyTypedData(domain, types, data.message, result)

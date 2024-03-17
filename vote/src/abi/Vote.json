@@ -71,6 +71,11 @@
             },
             {
                 "internalType": "uint256",
+                "name": "optionsAmount",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
                 "name": "votingStartTime",
                 "type": "uint256"
             },
@@ -120,12 +125,12 @@
             },
             {
                 "internalType": "uint256",
-                "name": "_optionCount",
+                "name": "_optionAmount",
                 "type": "uint256"
             },
             {
                 "internalType": "uint256",
-                "name": "_voterCount",
+                "name": "_voterAmount",
                 "type": "uint256"
             }
         ],

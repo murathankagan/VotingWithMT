@@ -8,7 +8,7 @@ import '../src/Vote.sol';
 contract VoteScript is Script {
     function setUp() public {
 
-        bytes4 voteContentSignature = bytes4(keccak256("voteContent(uint256, uint256)"));
+        bytes4 voteContentSignature = bytes4(keccak256("voteContent(uint256,uint256)"));
         bytes4[] memory allowedFunctionSignatures = new bytes4[](1);
         allowedFunctionSignatures[0] = voteContentSignature;
 

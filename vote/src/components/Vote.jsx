@@ -2,9 +2,10 @@ import React, { useState } from 'react';
 import styles from '../App.module.css';
 import { sendMessage } from '../web3/sendMT';
 
+
 const Vote = () => {
-  const [contentID, setcontentID] = useState('');
-  const [optionID, setoptionID] = useState('');
+  const [contentID, setcontentID] = useState(0);
+  const [optionID, setoptionID] = useState(0);
 
   const handleConfirm = async () => {
     try {
@@ -17,6 +18,7 @@ const Vote = () => {
     } catch (error) {
       alert(error);
     }
+    
   };
 
  

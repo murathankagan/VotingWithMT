@@ -17,13 +17,14 @@ const VotingCreate = () => {
             const provider = new ethers.providers.Web3Provider(window.ethereum);
             const signer = provider.getSigner();
             const contract = new ethers.Contract(deploy.VoteAddress, VoteABI, signer);
-
+            console.log(contract);
+            
             try {
                 const tx = await contract.createContent(url, tokenAddress, votingDuration, optionCount, voterCount);
                 await tx.wait();
                 alert('Content created successfully');
             } catch (error) {
-                console.error('Failed to create content:', error);
+                alert('Failed to create content:', error);
             }
         } else {
             alert('Non-Ethereum browser detected. You should consider trying MetaMask!');
