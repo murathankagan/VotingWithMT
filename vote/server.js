@@ -47,7 +47,6 @@ app.post('/relayTransaction', async (req, res) => {
             message: 'The Transaction could not get verified.'
         });
     }
-    console.log(process.env.PRIVATE_KEY);
     const provider = new ethers.providers.JsonRpcProvider(deployConfig.RPC_URL);
     const connectedWallet = new ethers.Wallet(process.env.PRIVATE_KEY, provider);
     const forwarderContract = new ethers.Contract(deployConfig.ForwarderAddress, ForwarderAbi, connectedWallet);
