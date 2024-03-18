@@ -43,7 +43,8 @@
 - Followed by 
 ```bash
 source .env
-forge script script/Vote.s.sol:VoteScript --rpc-url $ETH_RPC_URL --private-key $DEPLOYER_PRIVATE_KEY --broadcast```
+forge script script/Vote.s.sol:VoteScript --rpc-url $ETH_RPC_URL --private-key $DEPLOYER_PRIVATE_KEY --broadcast
+```
 and paste the addresses of the deployed contracts ``Forwarder.sol`` and ``Vote.sol`` into the ``Forwarder`` and ``Vote`` sections of the ``/vote/src/web3/deploy.json`` path.
 
 
