@@ -30,7 +30,29 @@ function App() {
   //   }
   // };
 
+  const switchNetworkToArbitrumSepolia = async () => {
+    if (window.ethereum) {
+      try {
+        await window.ethereum.request({
+          method: 'wallet_addEthereumChain',
+          params: [{
+            chainId: '0x' + parseInt('421614', 10).toString(16),
+            chainName: 'Arbitrum Sepolia',
+            nativeCurrency: { name: 'ETH', symbol: 'ETH', decimals: 18 },
+            rpcUrls: ['https://sepolia-rollup.arbitrum.io/rpc'],
+            blockExplorerUrls: ['https://sepolia.arbiscan.io/'],
+          }],
+        });
+      } catch (error) {
+        console.error("Failed to switch network:", error);
+      }
+    } else {
+      alert('Non-Ethereum browser detected. You should consider trying MetaMask!');
+    }
+  };
+
   // switchNetworkToSepolia();
+  switchNetworkToArbitrumSepolia();
   const [nav, setNav] = useState('vote');
   const voteButton = nav === "" ? styles.button : styles.voteButton;
   const voteListButton = nav === "" ? styles.button : styles.voteListButton;
