@@ -9,28 +9,28 @@ import VotingCreate from './components/VotingCreate';
 function App() {
   
 
-  const switchNetworkToSepolia = async () => {
-    if (window.ethereum) {
-      try {
-        await window.ethereum.request({
-          method: 'wallet_addEthereumChain',
-          params: [{
-            chainId: '0x' + parseInt('11155111', 10).toString(16),
-            chainName: 'Sepolia',
-            nativeCurrency: { name: 'ETH', symbol: 'ETH', decimals: 18 },
-            rpcUrls: ['https://rpc.sepolia.org'],
-            blockExplorerUrls: ['https://sepolia.etherscan.io'],
-          }],
-        });
-      } catch (error) {
-        console.error("Failed to switch network:", error);
-      }
-    } else {
-      alert('Non-Ethereum browser detected. You should consider trying MetaMask!');
-    }
-  };
+  // const switchNetworkToSepolia = async () => {
+  //   if (window.ethereum) {
+  //     try {
+  //       await window.ethereum.request({
+  //         method: 'wallet_addEthereumChain',
+  //         params: [{
+  //           chainId: '0x' + parseInt('11155111', 10).toString(16),
+  //           chainName: 'Sepolia',
+  //           nativeCurrency: { name: 'ETH', symbol: 'ETH', decimals: 18 },
+  //           rpcUrls: ['https://rpc.sepolia.org'],
+  //           blockExplorerUrls: ['https://sepolia.etherscan.io'],
+  //         }],
+  //       });
+  //     } catch (error) {
+  //       console.error("Failed to switch network:", error);
+  //     }
+  //   } else {
+  //     alert('Non-Ethereum browser detected. You should consider trying MetaMask!');
+  //   }
+  // };
 
-  switchNetworkToSepolia();
+  // switchNetworkToSepolia();
   const [nav, setNav] = useState('vote');
   const voteButton = nav === "" ? styles.button : styles.voteButton;
   const voteListButton = nav === "" ? styles.button : styles.voteListButton;

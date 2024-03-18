@@ -81,7 +81,7 @@ const VoteList = () => {
 
   const getOptionVotes = async () => {
     const { contract } = await initializeContract();
-    const content = contents.find(content => content.id === contentId);
+    const content = contents.find(content => content.id.toString() === contentId.toString());
     if (!content) {
       console.log('Content not found with the given contentId:', contentId);
       console.log('Contents:', contents);
@@ -92,7 +92,7 @@ const VoteList = () => {
     console.log('Content ID:', content.id, 'Type:', typeof content.id);
     console.log('Input Content ID:', contentId, 'Type:', typeof contentId);
 
-    const optionsAmount = content.optionsAmount;
+    const optionsAmount = parseInt(content.optionsAmount.toString(), 10);
     let votesForEachOption = [];
 
     for (let i = 1; i <= optionsAmount; i++) {
@@ -173,9 +173,9 @@ const VoteList = () => {
        <p className={styles.headerText}>Option Votes:</p>
        {optionVotes.map((votes, index) => (
          <p key={index} className={styles.headerText}>
-            Option {index + 1}: {votes} votes
-          </p>
-        ))}
+           Option {index + 1}: {votes.toString()} votes
+         </p>
+       ))}      
       </div>
     </div>
  );

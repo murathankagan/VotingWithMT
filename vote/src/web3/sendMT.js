@@ -62,7 +62,7 @@ async function buildRequest(forwarder, input) {
 }
 
 async function buildTypedData(request) {
-    const chainId = 11155111;
+    const chainId = 421614;
     const typeData = getMetaTxTypeData(chainId, deployConfig.ForwarderAddress);
     return {
         ...typeData,
@@ -121,7 +121,7 @@ async function signTypedData(signer, data) {
         const domain = {
             name: 'Forwarder',
             version: '0.0.1',
-            chainId: 11155111,
+            chainId: 421614,
             verifyingContract: deployConfig.ForwarderAddress
         }
 

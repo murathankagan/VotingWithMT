@@ -28,7 +28,7 @@ app.post('/relayTransaction', async (req, res) => {
     const domain = {
         name: 'Forwarder',
         version: '0.0.1',
-        chainId: 11155111,
+        chainId: 421614,
         verifyingContract: deployConfig.ForwarderAddress,
     };
 
@@ -62,7 +62,7 @@ app.post('/relayTransaction', async (req, res) => {
         });
     }
 
-    const gasLimit = (parseInt(request.gas) + 50000).toString();
+    const gasLimit = (parseInt(request.gas) + 100000).toString();
     const contractTx = await forwarderContract.executeDelegate(request, signature, { gasLimit });
     const transactionReceipt = await contractTx.wait();
     console.log(transactionReceipt);
